@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бюро детских дел — Семейный клуб в Перми</title>
+    <meta name="description" content="Раскройте потенциал вашего ребенка! Логопед, английский, психология, массаж и раннее развитие в одном месте.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5EB267',
+                        'primary-dark': '#4A8F52',
+                        accent: '#FFB300',
+                        warm: '#FF6B8A',
+                        sky: '#54A0FF',
+                        creative: '#7C4DFF',
+                        cream: '#FFFBF5',
+                        dark: '#1E293B',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #FFFBF5; color: #1E293B; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        ::selection { background: #5EB267; color: white; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+        @keyframes floatReverse { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-15px) rotate(-5deg)} }
+        .float-1{animation:float 6s ease-in-out infinite} .float-2{animation:floatReverse 5s ease-in-out infinite 1s} .float-3{animation:float 7s ease-in-out infinite 2s}
+        .service-card{transition:all .4s cubic-bezier(.16,1,.3,1)} .service-card:hover{transform:translateY(-8px)} .service-card:hover .service-img{transform:scale(1.08)} .service-img{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+        .counter{font-variant-numeric:tabular-nums}
+        .toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;padding:1rem 1.5rem;border-radius:1rem;color:white;font-weight:500;transform:translateX(120%);transition:transform .4s cubic-bezier(.16,1,.3,1);box-shadow:0 20px 40px rgba(0,0,0,.15)} .toast.show{transform:translateX(0)} .toast.success{background:linear-gradient(135deg,#5EB267,#4A8F52)} .toast.error{background:linear-gradient(135deg,#FF6B8A,#e5566f)}
+        .gradient-text{background:linear-gradient(135deg,#5EB267,#54A0FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-pattern{background-image:radial-gradient(circle at 20% 50%,rgba(94,178,103,.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,179,0,.08) 0%,transparent 50%),radial-gradient(circle at 60% 80%,rgba(255,107,138,.06) 0%,transparent 50%)}
+        .mobile-menu{transform:translateX(100%);transition:transform .3s ease} .mobile-menu.open{transform:translateX(0)}
+        @keyframes pulseRing{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}} .pulse-ring::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #5EB267;animation:pulseRing 2s ease-out infinite}
+        .blob{border-radius:30% 70% 70% 30%/30% 30% 70% 70%;animation:morph 8s ease-in-out infinite}
+        @keyframes morph{0%,100%{border-radius:30% 70% 70% 30%/30% 30% 70% 70%}25%{border-radius:58% 42% 75% 25%/76% 46% 54% 24%}50%{border-radius:50% 50% 33% 67%/55% 27% 73% 45%}75%{border-radius:33% 67% 58% 42%/63% 68% 32% 37%}}
+        ::-webkit-scrollbar{width:8px} ::-webkit-scrollbar-track{background:#FFFBF5} ::-webkit-scrollbar-thumb{background:#5EB267;border-radius:4px}
+        @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(94,178,103,.4)}50%{box-shadow:0 0 0 12px rgba(94,178,103,0)}} .cta-pulse{animation:ctaPulse 2s ease-in-out infinite}
+        .logo-img{object-fit:cover}
+        .img-placeholder{display:flex;align-items:center;justify-content:center;font-size:4rem}
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- STICKY MOBILE BAR -->
+    <div id="stickyBar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-t border-gray-200 p-3 md:hidden transition-transform duration-300" style="transform:translateY(100%)">
+        <a href="#form" class="block bg-primary hover:bg-primary-dark text-white text-center py-3.5 rounded-xl font-semibold transition-all cta-pulse">Записаться бесплатно</a>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <img src="https://z-cdn-media.chatglm.cn/files/abd7391b-65ce-48ec-9049-65eb7ed11796.jpg?auth_key=1882551134-19474ae87bd74675a1f68c733fb2fde1-0-0c45c08e3d024afabda4bd3e9115da98"
+                         alt="Бюро детских дел" class="w-10 h-10 rounded-xl logo-img group-hover:scale-110 transition-transform">
+                    <span class="font-heading font-semibold text-lg hidden sm:block">Бюро детских дел</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Услуги</a>
+                    <a href="#about" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">О нас</a>
+                    <a href="#gallery" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Галерея</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Контакты</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="tel:+79963238884" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                        <i data-lucide="phone" class="w-4 h-4"></i>+7 (996) 323-88-84
+                    </a>
+                    <a href="#form" class="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all hover:shadow-lg hover:shadow-primary/30 cta-pulse">Записаться</a>
+                </div>
+                <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 bg-white/95 backdrop-blur-xl">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-12">
+                <div class="flex items-center gap-2.5">
+                    <img src="https://z-cdn-media.chatglm.cn/files/abd7391b-65ce-48ec-9049-65eb7ed11796.jpg?auth_key=1882551134-19474ae87bd74675a1f68c733fb2fde1-0-0c45c08e3d024afabda4bd3e9115da98" alt="" class="w-10 h-10 rounded-xl logo-img">
+                    <span class="font-heading font-semibold text-lg">Бюро детских дел</span>
+                </div>
+                <button id="closeMenuBtn" class="p-2 rounded-lg hover:bg-gray-100"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div class="flex flex-col gap-6">
+                <a href="#services" class="text-2xl font-heading font-medium mobile-link">Услуги</a>
+                <a href="#about" class="text-2xl font-heading font-medium mobile-link">О нас</a>
+                <a href="#gallery" class="text-2xl font-heading font-medium mobile-link">Галерея</a>
+                <a href="#contact" class="text-2xl font-heading font-medium mobile-link">Контакты</a>
+                <div class="pt-6 border-t">
+                    <a href="tel:+79963238884" class="flex items-center gap-3 text-lg mb-4"><i data-lucide="phone" class="w-5 h-5 text-primary"></i>+7 (996) 323-88-84</a>
+                    <a href="#form" class="mobile-link block bg-primary text-white text-center px-8 py-4 rounded-full text-lg font-semibold">Записаться бесплатно</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-pattern min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute top-20 right-10 w-64 h-64 bg-primary/10 blob float-1 hidden lg:block"></div>
+        <div class="absolute bottom-20 left-10 w-48 h-48 bg-accent/10 blob float-2 hidden lg:block"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+                        <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>Набор в группы открыт
+                    </div>
+                    <h1 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-6">
+                        Раскройте <span class="gradient-text">потенциал</span> вашего ребёнка
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">Семейный клуб в Перми, где лучшие специалисты помогают детям развиваться бережно, профессионально и с удовольствием</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                        <a href="#form" class="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full text-lg font-bold transition-all hover:shadow-xl hover:shadow-primary/30 text-center cta-pulse flex items-center justify-center gap-2">
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>Записаться бесплатно
+                        </a>
+                        <a href="#services" class="bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-full text-base font-medium border border-gray-200 transition-all text-center">Наши услуги</a>
+                    </div>
+                    <div class="flex gap-8 md:gap-12">
+                        <div><div class="font-heading text-3xl md:text-4xl font-bold counter" data-target="500">0</div><div class="text-sm text-gray-500 mt-1">Счастливых семей</div></div>
+                        <div><div class="font-heading text-3xl md:text-4xl font-bold counter" data-target="7">0</div><div class="text-sm text-gray-500 mt-1">Специалистов</div></div>
+                        <div><div class="font-heading text-3xl md:text-4xl font-bold counter" data-target="8">0</div><div class="text-sm text-gray-500 mt-1">Направлений</div></div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/10">
+                        <img src="https://z-cdn-media.chatglm.cn/files/9f850c96-d0d2-4f25-8517-9f6b83ee03bc.jpg?auth_key=1882896244-e4a8789356534afdb810fd1e6d7627a1-0-0c4881bb60f63bfbf79088e3f28c1517"
+                             alt="Дети в театральной студии Бюро детских дел" class="w-full h-[400px] md:h-[550px] lg:h-[650px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 md:bottom-6 md:-left-8 bg-white rounded-2xl p-4 shadow-xl float-2">
+                        <div class="flex items-center gap-3"><div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center"><i data-lucide="gift" class="w-6 h-6 text-accent"></i></div><div><div class="font-heading font-bold text-lg">1 занятие</div><div class="text-sm text-gray-500">Бесплатно</div></div></div>
+                    </div>
+                    <div class="absolute -top-2 -right-2 md:top-8 md:-right-6 bg-white rounded-2xl p-4 shadow-xl float-3">
+                        <div class="flex items-center gap-3"><div class="w-12 h-12 bg-warm/10 rounded-xl flex items-center justify-center"><i data-lucide="heart" class="w-6 h-6 text-warm"></i></div><div><div class="font-heading font-bold text-lg">С любовью</div><div class="text-sm text-gray-500">К каждому малышу</div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-sky/10 text-sky px-4 py-2 rounded-full text-sm font-medium mb-4"><i data-lucide="sparkles" class="w-4 h-4"></i>Наши направления</div>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-4">Комплексная поддержка для<br class="hidden md:block"> комплексного результата</h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto">Мы объединили лучших специалистов, чтобы вы могли развивать ребёнка в одном месте</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- 1. Раннее развитие -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 reveal group">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/bfb936cf-b63f-4678-a5cb-9e5e58617c27.jpg?auth_key=1882885374-26b0f90fb074464ca49e0b85660aadd9-0-fda8355b28847eef1f146e717af4bfaa" alt="Раннее развитие" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Раннее развитие</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Мягкий старт — развивающие занятия для самых маленьких.</p>
+                        <div class="flex items-center justify-between"><span class="text-primary font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 2. Художественная студия -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/10 reveal group" style="transition-delay:.1s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e774a055-c5a1-49d3-a067-d6dbcef21a66.jpg?auth_key=1882885374-97cf275432e84bd98d82b40e26717316-0-59e5ab05419a25c91b3cc42322d22a5b" alt="Художественная студия" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Художественная студия</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Творческое развитие через рисование и прикладное искусство.</p>
+                        <div class="flex items-center justify-between"><span class="text-accent font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 3. Театр Маска (ФОТКА!) -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-warm/30 hover:shadow-xl hover:shadow-warm/10 reveal group" style="transition-delay:.2s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/9f850c96-d0d2-4f25-8517-9f6b83ee03bc.jpg?auth_key=1882896244-e4a8789356534afdb810fd1e6d7627a1-0-0c4881bb60f63bfbf79088e3f28c1517" alt="Театр Маска" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Театр «Маска»</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Актёрское мастерство и раскрепощение через игру.</p>
+                        <div class="flex items-center justify-between"><span class="text-warm font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-warm group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 4. Песочная терапия -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-creative/30 hover:shadow-xl hover:shadow-creative/10 reveal group" style="transition-delay:.3s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/d46a3f57-480f-487e-9ca4-e4fef6969047.jpg?auth_key=1882885374-fe750f3f37334b6086daad815a19c5e3-0-9432c68f66aeca67c042f1567ec53dc2" alt="Песочная терапия" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Песочная терапия</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Бережная работа с эмоциями через песок и сказку.</p>
+                        <div class="flex items-center justify-between"><span class="text-creative font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-creative group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 5. Школа экспериментов -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 reveal group">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e0364e8d-8d66-41f4-875b-aa5609eac00a.jpg?auth_key=1882885727-5adb8c4a974b4b249a8b0cc948a4a494-0-d790f03f135ac1d7d02588dc985d0cc2" alt="Школа экспериментов" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Школа экспериментов</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Увлекательные научные опыты для любознательных малышей.</p>
+                        <div class="flex items-center justify-between"><span class="text-primary font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 6. Подготовка к школе -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-sky/30 hover:shadow-xl hover:shadow-sky/10 reveal group" style="transition-delay:.1s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/1fafe684-f770-4feb-9371-6ecabcf4faec.jpg?auth_key=1882885727-ebf98454ac6f4c55b5d557b479eb9821-0-b753b11c3af068f60d5ed8b79815015d" alt="Подготовка к школе" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Подготовка к школе</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Уверенный старт для будущих первоклассников.</p>
+                        <div class="flex items-center justify-between"><span class="text-sky font-semibold text-sm">от 600 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-sky group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 7. Логопед и дефектолог (ФОТКА!) -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 reveal group" style="transition-delay:.2s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/340a500e-020e-44e1-bf94-ebe317a03729.jpg?auth_key=1882896244-de81a1b6f6684648b00c94543f2fc431-0-3d87e684702741e51e6d82fd89ad1655" alt="Логопед и дефектолог" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Логопед и дефектолог</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Запуск и коррекция речи. Чёткая и красивая речь.</p>
+                        <div class="flex items-center justify-between"><span class="text-primary font-semibold text-sm">от 550 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+
+                <!-- 8. Английский язык (ФОТКА!) -->
+                <div class="service-card bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-sky/30 hover:shadow-xl hover:shadow-sky/10 reveal group" style="transition-delay:.3s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://z-cdn-media.chatglm.cn/files/a11c31a2-566b-453e-8f41-588065995848.jpg?auth_key=1882896244-34680a3b42174133956251987811bf2f-0-55b3caaaf0feb4a44c44ea7d3da59846" alt="Английский язык" class="service-img w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-lg font-semibold mb-2">Английский язык</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">Игровой английский, влюбляющий в обучение.</p>
+                        <div class="flex items-center justify-between"><span class="text-sky font-semibold text-sm">от 600 ₽</span><a href="#form" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-sky group-hover:text-white transition-all"><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="relative reveal">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[550px]">
+                        <img src="https://z-cdn-media.chatglm.cn/files/a11c31a2-566b-453e-8f41-588065995848.jpg?auth_key=1882896244-34680a3b42174133956251987811bf2f-0-55b3caaaf0feb4a44c44ea7d3da59846" alt="Занятия английским в Бюро детских дел" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/5 rounded-3xl -z-10"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-accent/5 rounded-3xl -z-10"></div>
+                    <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl p-5 shadow-lg">
+                        <div class="flex items-center gap-4"><div class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center"><i data-lucide="award" class="w-7 h-7 text-white"></i></div><div><div class="font-heading text-2xl font-bold">2+</div><div class="text-sm text-gray-500">Года опыта</div></div></div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 bg-warm/10 text-warm px-4 py-2 rounded-full text-sm font-medium mb-6"><i data-lucide="heart" class="w-4 h-4"></i>О нашем клубе</div>
+                    <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-6">Место, где дети <span class="text-primary">расцветают</span></h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">Каждый родитель мечтает видеть своего ребёнка уверенным, успешным и гармонично развитым. Но как успеть всё: запустить или подтянуть речь, выучить английский, подготовить к школе — и при этом сохранить мягкие, доверительные отношения в семье?</p>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-10">В «Бюро детских дел» мы создали пространство, где специалисты работают вместе — бережно, профессионально и с любовью к каждому малышу.</p>
+                    <div class="grid grid-cols-2 gap-6 mb-10">
+                        <div class="flex items-start gap-3"><div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="users" class="w-5 h-5 text-primary"></i></div><div><div class="font-heading font-semibold">Малые группы</div><div class="text-sm text-gray-500">Максимум внимания</div></div></div>
+                        <div class="flex items-start gap-3"><div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="shield-check" class="w-5 h-5 text-accent"></i></div><div><div class="font-heading font-semibold">Эксперты</div><div class="text-sm text-gray-500">Проверенные спецы</div></div></div>
+                        <div class="flex items-start gap-3"><div class="w-10 h-10 bg-sky/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="smile" class="w-5 h-5 text-sky"></i></div><div><div class="font-heading font-semibold">Бережно</div><div class="text-sm text-gray-500">Уважение к личности</div></div></div>
+                        <div class="flex items-start gap-3"><div class="w-10 h-10 bg-warm/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="home" class="w-5 h-5 text-warm"></i></div><div><div class="font-heading font-semibold">Уют</div><div class="text-sm text-gray-500">Как дома, только лучше</div></div></div>
+                    </div>
+                    <a href="#form" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full text-base font-semibold transition-all hover:shadow-xl hover:shadow-primary/30">Записаться на пробное занятие <i data-lucide="arrow-right" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="benefits" class="py-20 md:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-cream via-white to-cream"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-creative/10 text-creative px-4 py-2 rounded-full text-sm font-medium mb-4"><i data-lucide="star" class="w-4 h-4"></i>Почему мы</div>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-4">Ваш ребёнок заслуживает<br class="hidden md:block"> лучшего старта</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all reveal group">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="map-pin" class="w-8 h-8 text-white"></i></div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Всё в одном месте</h3>
+                    <p class="text-gray-500 leading-relaxed">Логопед, психолог, английский, массаж — не нужно ездить по городу. Все специалисты рядом на Лядовской.</p>
+                </div>
+                <div class="bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all reveal group" style="transition-delay:.1s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="users-round" class="w-8 h-8 text-white"></i></div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Команда единомышленников</h3>
+                    <p class="text-gray-500 leading-relaxed">Наши специалисты работают сообща, координируя подход к каждому ребёнку.</p>
+                </div>
+                <div class="bg-white rounded-3xl p-8 border border-gray-100 hover:shadow-xl transition-all reveal group" style="transition-delay:.2s">
+                    <div class="w-16 h-16 bg-gradient-to-br from-warm to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="sparkle" class="w-8 h-8 text-white"></i></div>
+                    <h3 class="font-heading text-xl font-semibold mb-3">Индивидуальный подход</h3>
+                    <p class="text-gray-500 leading-relaxed">Маленькие группы, внимание к личности каждого ребёнка. Мы ценим уникальность вашего малыша.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="py-20 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4"><i data-lucide="camera" class="w-4 h-4"></i>Наш клуб</div>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight">У нас тепло и весело</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
+                <!-- Большая фотка — летняя площадка -->
+                <div class="col-span-2 row-span-2 rounded-3xl overflow-hidden group min-h-[300px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/c9c748cd-fe46-41bb-ae8f-66919d3be6e5.jpg?auth_key=1882885374-99918f847b3a4627ae19c1eeb4888dc1-0-a8820d4acc0848868324165598426a47" alt="Летняя площадка" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/bfb936cf-b63f-4678-a5cb-9e5e58617c27.jpg?auth_key=1882885374-26b0f90fb074464ca49e0b85660aadd9-0-fda8355b28847eef1f146e717af4bfaa" alt="Раннее развитие" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e774a055-c5a1-49d3-a067-d6dbcef21a66.jpg?auth_key=1882885374-97cf275432e84bd98d82b40e26717316-0-59e5ab05419a25c91b3cc42322d22a5b" alt="Художественная студия" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/d46a3f57-480f-487e-9ca4-e4fef6969047.jpg?auth_key=1882885374-fe750f3f37334b6086daad815a19c5e3-0-9432c68f66aeca67c042f1567ec53dc2" alt="Песочная терапия" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/e0364e8d-8d66-41f4-875b-aa5609eac00a.jpg?auth_key=1882885727-5adb8c4a974b4b249a8b0cc948a4a494-0-d790f03f135ac1d7d02588dc985d0cc2" alt="Школа экспериментов" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <!-- Новые фотки — второй ряд -->
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/9f850c96-d0d2-4f25-8517-9f6b83ee03bc.jpg?auth_key=1882896244-e4a8789356534afdb810fd1e6d7627a1-0-0c4881bb60f63bfbf79088e3f28c1517" alt="Театр Маска" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/340a500e-020e-44e1-bf94-ebe317a03729.jpg?auth_key=1882896244-de81a1b6f6684648b00c94543f2fc431-0-3d87e684702741e51e6d82fd89ad1655" alt="Логопед" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="col-span-2 rounded-3xl overflow-hidden group min-h-[200px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/a11c31a2-566b-453e-8f41-588065995848.jpg?auth_key=1882896244-34680a3b42174133956251987811bf2f-0-55b3caaaf0feb4a44c44ea7d3da59846" alt="Английский язык" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden group min-h-[150px]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/1fafe684-f770-4feb-9371-6ecabcf4faec.jpg?auth_key=1882885727-ebf98454ac6f4c55b5d557b479eb9821-0-b753b11c3af068f60d5ed8b79815015d" alt="Подготовка к школе" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM -->
+    <section id="form" class="py-20 md:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-cream to-accent/5"></div>
+        <div class="absolute top-20 right-20 w-72 h-72 bg-primary/10 blob float-1 hidden lg:block"></div>
+        <div class="absolute bottom-20 left-20 w-56 h-56 bg-accent/10 blob float-2 hidden lg:block"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal">
+                    <div class="inline-flex items-center gap-2 bg-warm/10 text-warm px-4 py-2 rounded-full text-sm font-medium mb-6"><i data-lucide="gift" class="w-4 h-4"></i>Бесплатно</div>
+                    <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-6">Подарите ребёнку <span class="gradient-text">лучший старт!</span></h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">Запишитесь на первую, <strong>бесплатную</strong> консультацию или пробное занятие. Количество мест в группах ограничено!</p>
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center gap-3 text-gray-600"><div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-4 h-4 text-primary"></i></div><span>Бесплатная консультация со специалистом</span></div>
+                        <div class="flex items-center gap-3 text-gray-600"><div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-4 h-4 text-primary"></i></div><span>Пробное занятие без обязательств</span></div>
+                        <div class="flex items-center gap-3 text-gray-600"><div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0"><i data-lucide="check" class="w-4 h-4 text-primary"></i></div><span>Перезвоним в течение 15 минут</span></div>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                        <div class="flex items-center gap-4"><div class="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center text-white font-heading font-bold text-xl">ФГ</div><div><div class="font-heading font-semibold">Фахрия Гасымова</div><div class="text-sm text-gray-500">Генеральный директор</div></div></div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <form id="contactForm" class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl shadow-gray-200/50 border border-gray-100" target="hidden_iframe">
+                        <h3 class="font-heading text-2xl font-bold mb-2">Записаться бесплатно</h3>
+                        <p class="text-gray-500 text-sm mb-8">Оставьте заявку — мы перезвоним!</p>
+                        <div class="space-y-5">
+                            <div><label for="name" class="block text-sm font-medium text-gray-700 mb-2">Ваше имя *</label><input type="text" id="name" name="name" required placeholder="Как вас зовут?" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base bg-gray-50/50 hover:bg-white focus:bg-white"></div>
+                            <div><label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Телефон *</label><input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base bg-gray-50/50 hover:bg-white focus:bg-white"></div>
+                            <div><label for="service" class="block text-sm font-medium text-gray-700 mb-2">Интересующая услуга</label><select id="service" name="service" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base bg-gray-50/50 hover:bg-white focus:bg-white appearance-none" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23999%22 stroke-width=%222%22><polyline points=%226 9 12 15 18 9%22/></svg>');background-repeat:no-repeat;background-position:right 1rem center"><option value="">Выберите направление</option><option value="Раннее развитие">Раннее развитие</option><option value="Художественная студия">Художественная студия</option><option value="Театр Маска">Театр «Маска»</option><option value="Песочная терапия">Песочная терапия</option><option value="Школа экспериментов">Школа экспериментов</option><option value="Подготовка к школе">Подготовка к школе</option><option value="Логопед и дефектолог">Логопед и дефектолог</option><option value="Английский язык">Английский язык</option><option value="Детский массаж">Детский массаж</option><option value="Психолог">Психолог</option><option value="Не определился">Пока не определился(лась)</option></select></div>
+                            <div><label for="childBirthday" class="block text-sm font-medium text-gray-700 mb-2">Дата рождения ребёнка</label><input type="date" id="childBirthday" name="childBirthday" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base bg-gray-50/50 hover:bg-white focus:bg-white"></div>
+                            <div><label for="message" class="block text-sm font-medium text-gray-700 mb-2">Комментарий</label><textarea id="message" name="message" rows="3" placeholder="Есть вопросы? Напишите здесь..." class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base bg-gray-50/50 hover:bg-white focus:bg-white resize-none"></textarea></div>
+                            <button type="submit" id="submitBtn" class="w-full bg-primary hover:bg-primary-dark text-white py-4 rounded-xl text-base font-semibold transition-all hover:shadow-xl hover:shadow-primary/30 flex items-center justify-center gap-2"><span id="btnText">Записаться бесплатно</span><svg id="btnSpinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></button>
+                            <p class="text-xs text-gray-400 text-center">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+                        </div>
+                        <div id="successMessage" class="hidden mt-6 p-6 bg-primary/10 rounded-2xl text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check" class="w-8 h-8 text-white"></i></div>
+                            <h4 class="font-heading text-xl font-bold text-primary mb-2">Заявка отправлена!</h4>
+                            <p class="text-gray-600 text-sm">Мы перезвоним вам в течение 15 минут</p>
+                        </div>
+                    </form>
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="contact" class="py-20 md:py-32 bg-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.4%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative">
+            <div class="text-center mb-16 reveal"><h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-4">Приходите в гости!</h2><p class="text-gray-400 text-lg">У нас тепло, весело и очень полезно</p></div>
+            <div class="grid md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
+                <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-primary/30 transition-all reveal group text-center">
+                    <div class="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-primary transition-all"><i data-lucide="map-pin" class="w-7 h-7 text-primary group-hover:text-white transition-colors"></i></div>
+                    <h3 class="font-heading text-xl font-semibold mb-2">Адрес</h3><p class="text-gray-400">г. Пермь,<br>ул. Лядовская, 127а</p>
+                    <a href="https://2gis.ru/perm/firm/70000001091305025" target="_blank" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">Смотреть на карте <i data-lucide="external-link" class="w-3 h-3"></i></a>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-accent/30 transition-all reveal group text-center" style="transition-delay:.1s">
+                    <div class="w-14 h-14 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-accent transition-all"><i data-lucide="phone" class="w-7 h-7 text-accent group-hover:text-white transition-colors"></i></div>
+                    <h3 class="font-heading text-xl font-semibold mb-2">Телефон</h3>
+                    <a href="tel:+79963238884" class="text-gray-300 hover:text-white transition-colors text-xl font-heading font-semibold">+7 (996) 323-88-84</a>
+                    <div class="mt-4"><a href="https://vk.ru/burodetskihdel" target="_blank" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.188 1.368 1.259 2.184 1.814.616.42 1.084.328 1.084.328l2.178-.03s1.14-.07.6-.964c-.044-.073-.314-.661-1.618-1.869-1.366-1.265-1.183-1.06.462-3.246.998-1.328 1.397-2.14 1.273-2.487-.119-.332-.852-.244-.852-.244l-2.452.015s-.182-.025-.316.056c-.131.079-.216.263-.216.263s-.387 1.03-.903 1.906c-1.089 1.848-1.524 1.946-1.702 1.832-.415-.266-.311-1.07-.311-1.641 0-1.784.271-2.527-.527-2.72-.265-.064-.46-.106-1.138-.113-.869-.009-1.604.003-2.02.207-.277.136-.491.439-.361.456.161.021.525.098.718.36.25.339.24 1.099.24 1.099s.144 2.105-.334 2.366c-.328.179-.777-.186-1.741-1.854-.494-.853-.867-1.796-.867-1.796s-.072-.176-.2-.271c-.155-.115-.372-.151-.372-.151l-2.33.015s-.35.01-.479.162c-.114.135-.009.414-.009.414s1.832 4.29 3.907 6.454c1.903 1.984 4.065 1.854 4.065 1.854h.98z"/></svg>ВКонтакте</a></div>
+                </div>
+            </div>
+            <div class="reveal rounded-3xl overflow-hidden border border-white/10" style="height:350px"><iframe src="https://yandex.ru/map-widget/v1/?ll=56.237%2C58.005&z=16&text=Пермь%20Лядовская%20127а" width="100%" height="100%" style="border:0" allowfullscreen loading="lazy" title="Карта"></iframe></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <img src="https://z-cdn-media.chatglm.cn/files/abd7391b-65ce-48ec-9049-65eb7ed11796.jpg?auth_key=1882551134-19474ae87bd74675a1f68c733fb2fde1-0-0c45c08e3d024afabda4bd3e9115da98" alt="" class="w-10 h-10 rounded-xl logo-img">
+                        <span class="font-heading font-semibold text-xl">Бюро детских дел</span>
+                    </div>
+                    <p class="text-gray-500 leading-relaxed max-w-md">Семейный клуб в Перми. Бережно и профессионально помогаем каждому ребёнку раскрыть свой потенциал.</p>
+                </div>
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Услуги</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#services" class="hover:text-primary transition-colors">Раннее развитие</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Художественная студия</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Театр «Маска»</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Песочная терапия</a></li>
+                        <li><a href="#services" class="hover:text-primary transition-colors">Логопед</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-primary"></i><a href="tel:+79963238884" class="hover:text-white transition-colors">+7 (996) 323-88-84</a></li>
+                        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>Лядовская 127а, Пермь</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 Бюро детских дел. Все права защищены.</p>
+                <a href="https://vk.ru/burodetskihdel" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors text-sm"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.188 1.368 1.259 2.184 1.814.616.42 1.084.328 1.084.328l2.178-.03s1.14-.07.6-.964c-.044-.073-.314-.661-1.618-1.869-1.366-1.265-1.183-1.06.462-3.246.998-1.328 1.397-2.14 1.273-2.487-.119-.332-.852-.244-.852-.244l-2.452.015s-.182-.025-.316.056c-.131.079-.216.263-.216.263s-.387 1.03-.903 1.906c-1.089 1.848-1.524 1.946-1.702 1.832-.415-.266-.311-1.07-.311-1.641 0-1.784.271-2.527-.527-2.72-.265-.064-.46-.106-1.138-.113-.869-.009-1.604.003-2.02.207-.277.136-.491.439-.361.456.161.021.525.098.718.36.25.339.24 1.099.24 1.099s.144 2.105-.334 2.366c-.328.179-.777-.186-1.741-1.854-.494-.853-.867-1.796-.867-1.796s-.072-.176-.2-.271c-.155-.115-.372-.151-.372-.151l-2.33.015s-.35.01-.479.162c-.114.135-.009.414-.009.414s1.832 4.29 3.907 6.454c1.903 1.984 4.065 1.854 4.065 1.854h.98z"/></svg>Мы ВКонтакте</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING PHONE -->
+    <a href="tel:+79963238884" id="floatingBtn" class="fixed bottom-20 right-6 z-40 w-14 h-14 bg-white hover:bg-gray-50 text-primary rounded-full flex items-center justify-center shadow-lg border border-gray-200 transition-all hover:scale-110 md:bottom-6" style="opacity:0;pointer-events:none;transition:all .3s ease"><i data-lucide="phone" class="w-6 h-6"></i></a>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"><span id="toastText"></span></div>
+
+    <script>
+    lucide.createIcons();
+
+    // NAVBAR
+    const navbar = document.getElementById('navbar');
+    const stickyBar = document.getElementById('stickyBar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-white/90','backdrop-blur-xl','shadow-sm','border-b','border-gray-100');
+        } else {
+            navbar.classList.remove('bg-white/90','backdrop-blur-xl','shadow-sm','border-b','border-gray-100');
+        }
+        stickyBar.style.transform = window.scrollY > 600 ? 'translateY(0)' : 'translateY(100%)';
+    });
+
+    // MOBILE MENU
+    const mobileMenu = document.getElementById('mobileMenu');
+    document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.add('open'));
+    document.getElementById('closeMenuBtn').addEventListener('click', () => mobileMenu.classList.remove('open'));
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // REVEAL ON SCROLL
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // COUNTERS
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const target = +e.target.dataset.target;
+                const duration = 2000;
+                const start = performance.now();
+                const animate = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    e.target.textContent = Math.round(target * eased) + (target >= 500 ? '+' : '');
+                    if (progress < 1) requestAnimationFrame(animate);
+                };
+                requestAnimationFrame(animate);
+                counterObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    // FLOATING PHONE BUTTON
+    const floatingBtn = document.getElementById('floatingBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) { floatingBtn.style.opacity = '1'; floatingBtn.style.pointerEvents = 'auto'; }
+        else { floatingBtn.style.opacity = '0'; floatingBtn.style.pointerEvents = 'none'; }
+    });
+
+    // PHONE MASK
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').substring(0, 11);
+        if (x.length > 0) {
+            if (x[0] === '8') x = '7' + x.substring(1);
+            if (x[0] !== '7') x = '7' + x;
+            let formatted = '+7';
+            if (x.length > 1) formatted += ' (' + x.substring(1, 4);
+            if (x.length > 4) formatted += ') ' + x.substring(4, 7);
+            if (x.length > 7) formatted += '-' + x.substring(7, 9);
+            if (x.length > 9) formatted += '-' + x.substring(9, 11);
+            e.target.value = formatted;
+        }
+    });
+
+    // TOAST
+    function showToast(text, type = 'success') {
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
+        toastText.textContent = text;
+        toast.className = 'toast ' + type;
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // FORM SUBMIT
+    const form = document.getElementById('contactForm');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        if (!name || !phone) { showToast('Заполните все обязательные поля', 'error'); return; }
+        if (phone.replace(/\D/g, '').length < 11) { showToast('Введите корректный номер телефона', 'error'); return; }
+
+        btnText.textContent = 'Отправляем...';
+        btnSpinner.classList.remove('hidden');
+        document.getElementById('submitBtn').disabled = true;
+
+        // Имитация отправки (замените на реальный URL)
+        setTimeout(() => {
+            btnText.textContent = 'Записаться бесплатно';
+            btnSpinner.classList.add('hidden');
+            document.getElementById('submitBtn').disabled = false;
+            successMessage.classList.remove('hidden');
+            form.reset();
+            showToast('Заявка отправлена! Перезвоним в течение 15 минут');
+            lucide.createIcons();
+        }, 1500);
+    });
+    </script>
+</body>
+</html>
